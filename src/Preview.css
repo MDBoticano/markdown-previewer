@@ -1,5 +1,10 @@
 #preview {
   margin: 2em 0;
-  width: 100%;
+  max-width: 100%;
   background-color: #ccc;
+}
+
+#markdown-text {
+  max-width: 100%;
+  padding: 1.5em;
 }

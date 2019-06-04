@@ -13,10 +13,14 @@ class Preview extends React.Component {
 
   // Function: Apply Markdown to copied text
 
+
+  // Render
   render() {
     return (
       <div id="preview">
-        {this.state.editorText}
+        <div id="markdown-text">
+          {this.state.editorText}
+        </div>
       </div>
     );
   }
