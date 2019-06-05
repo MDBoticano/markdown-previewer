@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+// Styling
 import './Preview.css';
+
+// React-Redux
+import { connect } from 'react-redux';
 
 class Preview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorText: "Hello"
+      editorText: ""
     };
   }
 
@@ -19,11 +24,18 @@ class Preview extends React.Component {
     return (
       <div id="preview">
         <div id="markdown-text">
-          {this.state.editorText}
+          
         </div>
       </div>
     );
   }
 }
 
-export default Preview;
+const mapStateToProps = function(state) {
+  console.log(state.editorText);
+  return {
+    previewText: state.editorText
+  }
+}
+
+export default connect(mapStateToProps)(Preview);

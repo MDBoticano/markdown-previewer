@@ -1,29 +1,54 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+// Styling
 import './Editor.css';
+
+// React-Redux
+import { connect } from 'react-redux';
 
 class Editor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorText: ""
+      editorText: this.props.editorText,
+      textToPreview: ""
     };
-
+    // Bind functions
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
   }
 
   // Function: when textarea is modified, update state to reflect changes
-  handleTextAreaChange = () => {
-
+  handleTextAreaChange = (event) => {
+    this.setState({
+      editorText: event.target.value,
+    });
   }
-
 
   // Render
   render() {
     return (
-      <textarea id="editor" onChange={this.handleTextAreaChange}>
-      </textarea>
+      <React.Fragment>
+        <textarea id="editor" value={this.state.editorText} 
+        onChange={this.handleTextAreaChange}>
+        </textarea>
+      </React.Fragment>    
     );
   }
 }
 
-export default Editor;
+// Puts state data into store
+const mapStateToProps = (state) => {
+  console.log(state.editorText);
+  return {
+    editorText: state.editorText
+  }
+}
+
+// Dispatch to actually change store
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    editorText: props.editorText
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);
