@@ -15,17 +15,25 @@ class Editor extends React.Component {
     };
     // Bind functions
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+    this.updateParent = this.updateParent.bind(this);
   }
 
   // Function: when textarea is modified, update state to reflect changes
   handleTextAreaChange = (event) => {
     this.setState({
       editorText: event.target.value,
+    }, () => {
+      this.updateParent();
     });
-    // Use callback function to update parent editorText
-    this.props.handler(this.state.editorText);
   }
 
+  // Use callback function to update parent editorText
+  // ISSUE: one character behind, need to handle async?
+  // Function: callback function to update parent property "editorText"
+  updateParent = () => {
+    this.props.handler(this.state.editorText);
+  }
+  
   // Render
   render() {
     return (
@@ -40,7 +48,7 @@ class Editor extends React.Component {
 
 // Puts state data into store
 const mapStateToProps = (state) => {
-  console.log(state.editorText);
+  //console.log(state.editorText);
   return {
     editorText: state.editorText
   }
