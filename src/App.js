@@ -44,6 +44,14 @@ class App extends React.Component {
       editorText: "",
       previewText: ""
     };
+    this.handler = this.handler.bind(this);
+  }
+
+  // Function: callback to update parent using child
+  handler = (childText) => {
+    this.setState({
+      previewText: childText
+    });
   }
 
   // Subscribe to store
@@ -57,8 +65,8 @@ class App extends React.Component {
   render() {
     return (
       <div id="app-body">
-        <Editor />
-        <Preview editorText={this.props.editorText}/>
+        <Editor handler={this.handler}/>
+        <Preview editorText={this.state.previewText}/>
       </div>
     );
   }

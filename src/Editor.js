@@ -22,6 +22,8 @@ class Editor extends React.Component {
     this.setState({
       editorText: event.target.value,
     });
+    // Use callback function to update parent editorText
+    this.props.handler(this.state.editorText);
   }
 
   // Render

@@ -10,8 +10,18 @@ class Preview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorText: ""
+      editorText: this.props.editorText
     };
+  }
+
+  // Function: if props changes, update state to reflect it
+  // Components don't re-render unless the STATE changes
+  componentDidUpdate(prevProps) {
+    // Compare current props to previous props
+    if(this.props.editorText !== prevProps.editorText) {
+      // update state if props have been changed
+      this.setState({editorText: this.props.editorText});
+    }
   }
 
   // Function: Copy text from Editor and set it as Preview text
@@ -24,7 +34,7 @@ class Preview extends React.Component {
     return (
       <div id="preview">
         <div id="markdown-text">
-          
+          <p>{this.state.editorText}</p>
         </div>
       </div>
     );
