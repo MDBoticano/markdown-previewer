@@ -4,13 +4,14 @@ import React from 'react';
 import './Preview.css';
 
 // React-Redux
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 class Preview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editorText: this.props.editorText
+      editorText: this.props.editorText,
+      markdownText: ""
     };
   }
 
@@ -18,9 +19,9 @@ class Preview extends React.Component {
   // Components don't re-render unless the STATE changes
   componentDidUpdate(prevProps) {
     // Compare current props to previous props
-    if(this.props.editorText !== prevProps.editorText) {
+    if (this.props.editorText !== prevProps.editorText) {
       // update state if props have been changed
-      this.setState({editorText: this.props.editorText});
+      this.setState({ editorText: this.props.editorText });
     }
   }
 
@@ -32,20 +33,26 @@ class Preview extends React.Component {
   // Render
   render() {
     return (
-      <div id="preview">
-        <div id="markdown-text">
-          <p>{this.state.editorText}</p>
+      <React.Fragment>
+        <h2>Preview</h2>
+        <div id="preview">
+          <div id="markdown-text">
+            <p>{this.state.editorText}</p>
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = function(state) {
-  console.log(state.editorText);
-  return {
-    previewText: state.editorText
-  }
-}
+// Redux code
+// const mapStateToProps = function (state) {
+//   console.log(state.editorText);
+//   return {
+//     previewText: state.editorText
+//   }
+// }
 
-export default connect(mapStateToProps)(Preview);
+// export default connect(mapStateToProps)(Preview);
+
+export default Preview;

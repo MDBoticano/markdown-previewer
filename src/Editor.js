@@ -4,7 +4,7 @@ import React from 'react';
 import './Editor.css';
 
 // React-Redux
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 class Editor extends React.Component {
   constructor(props) {
@@ -31,13 +31,14 @@ class Editor extends React.Component {
   // ISSUE: one character behind, need to handle async?
   // Function: callback function to update parent property "editorText"
   updateParent = () => {
-    this.props.handler(this.state.editorText);
+    this.props.previewUpdater(this.state.editorText);
   }
   
   // Render
   render() {
     return (
       <React.Fragment>
+        <h2>Editor</h2>
         <textarea id="editor" value={this.state.editorText} 
         onChange={this.handleTextAreaChange}>
         </textarea>
@@ -46,19 +47,21 @@ class Editor extends React.Component {
   }
 }
 
-// Puts state data into store
-const mapStateToProps = (state) => {
-  //console.log(state.editorText);
-  return {
-    editorText: state.editorText
-  }
-}
+// Redux store code
+// // Puts state data into store
+// const mapStateToProps = (state) => {
+//   //console.log(state.editorText);
+//   return {
+//     editorText: state.editorText
+//   }
+// }
 
-// Dispatch to actually change store
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    editorText: props.editorText
-  }
-}
+// // Dispatch to actually change store
+// const mapDispatchToProps = (dispatch, props) => {
+//   return {
+//     editorText: props.editorText
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+// export default connect(mapStateToProps, mapDispatchToProps)(Editor);
+export default Editor;
