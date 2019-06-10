@@ -16,21 +16,27 @@ class Preview extends React.Component {
       editorText: this.props.editorText,
       markdownText: ""
     };
+    this.loadDefaultMD = this.loadDefaultMD.bind(this);
   }
 
-  // At the start, load the converted default markdown into preview
+  // Lifecycle: once component has mounted, right before rendering
   componentDidMount() {
-    // Path for Default
+    this.loadDefaultMD();
+  }
+
+  // Loads default markdown file to preview
+  loadDefaultMD() {
+    // Path for Default.md
     let defaultPath = require("./Default.md");
 
-    // Update state 
+    // Update state to include converted text
     fetch(defaultPath)
       .then(response => {
         return response.text()
       })
       .then(text => {
         this.setState({
-         markdownText: marked(text)
+          markdownText: marked(text)
         })
       })
   }
@@ -42,7 +48,7 @@ class Preview extends React.Component {
     if (this.props.editorText !== prevProps.editorText) {
       // Update state with a converted mark down text
       // Note: editorText is unecessary, as it's the same as props
-      this.setState({ editorText: this.props.editorText, markdownText: marked(this.props.editorText)});
+      this.setState({ editorText: this.props.editorText, markdownText: marked(this.props.editorText) });
     }
   }
 
@@ -51,8 +57,8 @@ class Preview extends React.Component {
     return (
       <React.Fragment>
         <h2>Preview</h2>
-        <div id="preview" class="markdown-text" 
-        dangerouslySetInnerHTML={{__html: this.state.markdownText}} />
+        <div id="preview" class="markdown-text"
+          dangerouslySetInnerHTML={{ __html: this.state.markdownText }} />
       </React.Fragment>
     );
   }

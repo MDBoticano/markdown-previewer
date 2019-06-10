@@ -16,14 +16,20 @@ class Editor extends React.Component {
     // Bind functions
     this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
     this.updateParent = this.updateParent.bind(this);
+    this.loadDefaultMD = this.loadDefaultMD.bind(this);
   }
 
-  // At the start, load default markdown into editor
+  // Lifecycle: once component has mounted, right before rendering
   componentDidMount() {
-    // Path for Default
+    this.loadDefaultMD();
+  }
+
+  // Loads default markdown file to preview
+  loadDefaultMD() {
+    // Path for Default.md
     let defaultPath = require("./Default.md");
 
-    // Update state 
+    // Update state to include editor text
     fetch(defaultPath)
       .then(response => {
         return response.text()
