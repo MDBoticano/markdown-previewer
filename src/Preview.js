@@ -3,6 +3,9 @@ import React from 'react';
 // Styling
 import './Preview.css';
 
+// Marked for parsing and converting to markdown
+import marked from 'marked';
+
 // React-Redux
 // import { connect } from 'react-redux';
 
@@ -15,31 +18,41 @@ class Preview extends React.Component {
     };
   }
 
+  // At the start, load the converted default markdown into preview
+  componentDidMount() {
+    // Path for Default
+    let defaultPath = require("./Default.md");
+
+    // Update state 
+    fetch(defaultPath)
+      .then(response => {
+        return response.text()
+      })
+      .then(text => {
+        this.setState({
+         markdownText: marked(text)
+        })
+      })
+  }
+
   // Function: if props changes, update state to reflect it
   // Components don't re-render unless the STATE changes
   componentDidUpdate(prevProps) {
     // Compare current props to previous props
     if (this.props.editorText !== prevProps.editorText) {
-      // update state if props have been changed
-      this.setState({ editorText: this.props.editorText });
+      // Update state with a converted mark down text
+      // Note: editorText is unecessary, as it's the same as props
+      this.setState({ editorText: this.props.editorText, markdownText: marked(this.props.editorText)});
     }
   }
-
-  // Function: Copy text from Editor and set it as Preview text
-
-  // Function: Apply Markdown to copied text
-
 
   // Render
   render() {
     return (
       <React.Fragment>
         <h2>Preview</h2>
-        <div id="preview">
-          <div id="markdown-text">
-            <p>{this.state.editorText}</p>
-          </div>
-        </div>
+        <div id="preview" class="markdown-text" 
+        dangerouslySetInnerHTML={{__html: this.state.markdownText}} />
       </React.Fragment>
     );
   }

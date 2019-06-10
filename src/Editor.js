@@ -18,6 +18,23 @@ class Editor extends React.Component {
     this.updateParent = this.updateParent.bind(this);
   }
 
+  // At the start, load default markdown into editor
+  componentDidMount() {
+    // Path for Default
+    let defaultPath = require("./Default.md");
+
+    // Update state 
+    fetch(defaultPath)
+      .then(response => {
+        return response.text()
+      })
+      .then(text => {
+        this.setState({
+          editorText: text
+        })
+      })
+  }
+
   // Function: when textarea is modified, update state to reflect changes
   handleTextAreaChange = (event) => {
     this.setState({
@@ -33,16 +50,16 @@ class Editor extends React.Component {
   updateParent = () => {
     this.props.previewUpdater(this.state.editorText);
   }
-  
+
   // Render
   render() {
     return (
       <React.Fragment>
         <h2>Editor</h2>
-        <textarea id="editor" value={this.state.editorText} 
-        onChange={this.handleTextAreaChange}>
+        <textarea id="editor" value={this.state.editorText}
+          onChange={this.handleTextAreaChange}>
         </textarea>
-      </React.Fragment>    
+      </React.Fragment>
     );
   }
 }
