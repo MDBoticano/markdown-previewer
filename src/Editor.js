@@ -60,12 +60,12 @@ class Editor extends React.Component {
   // Render
   render() {
     return (
-      <React.Fragment>
-        <h2>Editor</h2>
+      <div id="editor-body">
+        <h2 id="editor-title">Editor</h2>
         <textarea id="editor" value={this.state.editorText}
           onChange={this.handleTextAreaChange}>
         </textarea>
-      </React.Fragment>
+      </div>
     );
   }
 }

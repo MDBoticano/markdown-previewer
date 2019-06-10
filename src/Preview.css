@@ -1,10 +1,31 @@
+#preview-body {
+  margin: 2em 0 0 0;
+  max-width: 800px;
+  background-color: #222;
+  box-shadow: 8px 8px #444;
+  border: solid;
+}
+
+#preview-title {
+  margin: 0 0 0 .25em;
+  color: #efefef;
+}
+
 #preview {
-  margin: 1em 0;
-  max-width: 100%;
-  background-color: #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #DDDAE7;
+  
 }
 
 .markdown-text {
   max-width: 100%;
   padding: 1.5em;
+}
+
+/* Code Block */
+pre {
+  background-color: #eee;
+  overflow-x: auto;
 }
