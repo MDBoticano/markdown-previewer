@@ -57,7 +57,7 @@ class Preview extends React.Component {
     return (
       <div id="preview-body">
         <h2 id="preview-title">Preview</h2>
-        <div id="preview" class="markdown-text"
+        <div id="preview" className="markdown-text"
           dangerouslySetInnerHTML={{ __html: this.state.markdownText }} />
       </div>
     );

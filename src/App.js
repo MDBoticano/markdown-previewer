@@ -37,6 +37,16 @@ const editorReducer = (state = '', action) => {
 const store = createStore(editorReducer);
 
 // ---------------------------- React Code ---------------------------------- //
+
+// Styling for body
+let styles = {
+  body : {
+    "background-color": "#ddd",
+    "min-height": "100vh"
+  }
+}
+
+// Class App
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +55,7 @@ class App extends React.Component {
       previewText: ""
     };
     this.previewUpdater = this.previewUpdater.bind(this);
+    this.loadStyles = this.loadStyles.bind(this);
   }
 
   // Function: callback to update parent using child
@@ -53,6 +64,19 @@ class App extends React.Component {
       previewText: childText
     });
   }
+
+  loadStyles = () => {
+    for (var i in styles.body) {
+      document.body.style[i] = styles.body[i];
+    }
+    console.log("Styles loaded");
+  }
+
+  componentWillMount() {
+    this.loadStyles();
+  }
+
+
 
   // Subscribe to store
   // store.subscribe = () => {
