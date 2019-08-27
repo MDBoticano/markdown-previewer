@@ -5,7 +5,7 @@
   "homepage": "https://www.marloboticano.com/markdown-previewer",
   "dependencies": {
     "gh-pages": "^2.0.1",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
